@@ -7,9 +7,11 @@ public class DecoratorCirugia extends DecoratorEspecialidades {
 		super(encapsulado);
 	}
 
+
+
 	@Override
-	public void aumentoHonorario() {
+	public double getHonorario() {
 		// TODO Auto-generated method stub
-		
+		return this.encapsulado.getHonorario() *1.1;
 	}
 }

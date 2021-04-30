@@ -9,6 +9,6 @@ public abstract class DecoratorEspecialidades implements IMedico{
 	}
 	
 	
-	public abstract void aumentoHonorario();
+
 	
 }
