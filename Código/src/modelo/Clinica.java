@@ -1,6 +1,8 @@
 package modelo;
 
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class Clinica {
 	private static Clinica instance = null;
@@ -9,8 +11,10 @@ public class Clinica {
 	private String telefono;
 	private String ciudad;
 	private Paciente salaPrivada;
-	private HashMap<Long,Paciente> patio = new HashMap<Long,Paciente>();
+	private Queue<Paciente> listaEspera = new LinkedList();
+	private HashMap<Long,Paciente> listaAtencion = new HashMap<Long,Paciente>();
 	private HashMap<Long,Habitacion> habitaciones = new HashMap<Long,Habitacion>();
+	private HashMap<String,Paciente> pacientesRegistrados = new HashMap<String,Paciente>();
 	
 	
 	private Clinica() {
@@ -18,6 +22,7 @@ public class Clinica {
 		this.direccion = "Colón 2321";
 		this.telefono = "223895648";
 		this.ciudad = "Mar del Plata";
+		this.salaPrivada = null;
 	}
 	
 	public static Clinica getInstance() {
@@ -28,4 +33,25 @@ public class Clinica {
 	}
 	
 	
+	public Paciente getSalaPrivada() {
+		return salaPrivada;
+	}
+
+	public void Ingreso(Paciente paciente) {
+		if (!pacientesRegistrados.containsKey(paciente.getDni())) 
+			pacientesRegistrados.put(paciente.getDni(), paciente);
+		listaEspera.add(paciente);
+		if (this.salaPrivada == null || paciente.prioridad(salaPrivada))
+			salaPrivada = paciente;
+	}
+	
+	public void Atencion() {
+		Paciente p = listaEspera.poll();
+		listaAtencion.put(p.getNroHistoria(), p);
+	}
+	
+	public void EgresoYFacturacion(Paciente paciente, Medico medico, int dias, Habitacion habitacion) {
+		listaAtencion.remove(paciente.getNroHistoria());
+		
+	}
 }

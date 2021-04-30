@@ -1,6 +1,6 @@
 package decorators;
 
-public class DecoratorCirugia extends DecoratorEspecialidades {
+public class DecoratorCirugia extends DecoratorMedico {
 
 	public DecoratorCirugia(IMedico encapsulado)
 	{
@@ -8,8 +8,7 @@ public class DecoratorCirugia extends DecoratorEspecialidades {
 	}
 
 	@Override
-	public void aumentoHonorario() {
-		// TODO Auto-generated method stub
-		
+	public double getHonorario() {
+		return this.encapsulado.getHonorario() *1.1;
 	}
 }
