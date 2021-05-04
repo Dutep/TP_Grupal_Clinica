@@ -15,6 +15,7 @@ public class Clinica {
 	private HashMap<Long,Paciente> listaAtencion = new HashMap<Long,Paciente>();
 	private HashMap<Long,Habitacion> habitaciones = new HashMap<Long,Habitacion>();
 	private HashMap<String,Paciente> pacientesRegistrados = new HashMap<String,Paciente>();
+	private HashMap<Long,Medico> medicos = new HashMap<Long,Medico>();
 	
 	
 	private Clinica() {
@@ -37,6 +38,10 @@ public class Clinica {
 		return salaPrivada;
 	}
 
+	public void addMedico(Medico medico) {
+		this.medicos.put(medico.getNroMatricula(), medico);
+	}
+	
 	public void Ingreso(Paciente paciente) {
 		if (!pacientesRegistrados.containsKey(paciente.getDni())) 
 			pacientesRegistrados.put(paciente.getDni(), paciente);
@@ -50,8 +55,8 @@ public class Clinica {
 		listaAtencion.put(p.getNroHistoria(), p);
 	}
 	
-	public void EgresoYFacturacion(Paciente paciente, Medico medico, int dias, Habitacion habitacion) {
-		listaAtencion.remove(paciente.getNroHistoria());
+	public void EgresoYFacturacion(Paciente paciente, Medico medico, int dias, Habitacion habitacion, int cantConsultas) {
+		listaAtencion.remove(paciente.getNroHistoria()); //Exception para verificar
 		
 	}
 }

@@ -2,17 +2,20 @@ package modelo;
 
 public class Compartida extends Habitacion {
 
+	public Compartida(int numeroHabitacion) {
+		super(numeroHabitacion);
+	}
+
 	private static final double costoCompartida = 500;
 	
-	
-	public static double getCostocompartida() {
+	@Override
+	public double getCostoHabitacion() {
 		return costoCompartida;
 	}
 
 	@Override
-	public void getCosto() {
-		// TODO Auto-generated method stub
-		
+	public double getCosto(int dias) {
+		return Habitacion.costoAsignacion + costoCompartida * dias;
 	}
 
 }

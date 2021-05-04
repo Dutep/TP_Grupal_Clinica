@@ -2,11 +2,13 @@ package modelo;
 
 public abstract class Habitacion {
 	
-	private static final double costoAsignacion = 1000; 
+	protected static final double costoAsignacion = 1000;
 	private int numeroHabitacion;
-	private int dias;
-	protected double costo;
 	
+	public Habitacion(int numeroHabitacion) {
+		this.numeroHabitacion = numeroHabitacion;
+	}
+
 	public static double getCostoasignacion() {
 		return costoAsignacion;
 	}
@@ -14,17 +16,10 @@ public abstract class Habitacion {
 	public int getNumeroHabitacion() {
 		return numeroHabitacion;
 	}
-
-	public int getDias() {
-		return dias;
-	}
-
-
 	
+	public abstract double getCostoHabitacion();
 	
-	
-	public abstract void getCosto();
-	
+	public abstract double getCosto(int dias);
 	
 	
 }

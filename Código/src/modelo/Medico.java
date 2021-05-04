@@ -14,12 +14,12 @@ public class Medico extends Persona implements IMedico{
 		this.honorario = 10000;
 	}
 
-
+	@Override
 	public long getNroMatricula() {
 		return nroMatricula;
 	}
 
-
+	@Override
 	public double getHonorario() {
 		return honorario;
 	}

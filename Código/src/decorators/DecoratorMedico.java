@@ -8,4 +8,14 @@ public abstract class DecoratorMedico implements IMedico{
 		this.encapsulado = encapsulado;
 	}
 	
+	@Override
+	public long getNroMatricula() {
+		return this.encapsulado.getNroMatricula();
+	}
+	
+	@Override
+	public String getNombre() {
+		return this.encapsulado.getNombre();
+	}
+	
 }

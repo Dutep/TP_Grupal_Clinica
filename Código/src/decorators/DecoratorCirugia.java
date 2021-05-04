@@ -11,4 +11,5 @@ public class DecoratorCirugia extends DecoratorMedico {
 	public double getHonorario() {
 		return this.encapsulado.getHonorario() *1.1;
 	}
+
 }
