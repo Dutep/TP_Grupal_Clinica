@@ -15,6 +15,8 @@ public class PruebaClinica {
 
 	public static void main(String[] args) {
 		
+		
+		
 		IMedico Medico1 = MedicoFactory.getMedico("Pediatria","Residente","Magister", "11234532", "Pepe", "Pepe", "San luis 1234", "Batan", "5551234", 2345);
 		
 		Paciente p1 = new Joven("111", "nini", "nono", "112233", "mdp", "123", 123123);

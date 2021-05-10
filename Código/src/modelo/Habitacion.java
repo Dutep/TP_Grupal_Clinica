@@ -2,18 +2,22 @@ package modelo;
 
 public abstract class Habitacion {
 	
-	protected static final double costoAsignacion = 1000;
-	private int numeroHabitacion;
+	protected static double costoAsignacion;
+	private String numeroHabitacion;
 	
-	public Habitacion(int numeroHabitacion) {
+	public Habitacion(String numeroHabitacion) {
 		this.numeroHabitacion = numeroHabitacion;
 	}
 
+	public static void setCostoAsignacion(double costo) {
+		Habitacion.costoAsignacion = costo;
+	}
+	
 	public static double getCostoasignacion() {
 		return costoAsignacion;
 	}
 
-	public int getNumeroHabitacion() {
+	public String getNumeroHabitacion() {
 		return numeroHabitacion;
 	}
 	

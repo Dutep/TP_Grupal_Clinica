@@ -2,11 +2,15 @@ package modelo;
 
 public class TerapiaIntensiva extends Habitacion {
 
-	public TerapiaIntensiva(int numeroHabitacion) {
+	private static double costoTerapiaIntensiva;
+	
+	public TerapiaIntensiva(String numeroHabitacion) {
 		super(numeroHabitacion);
 	}
-
-	private static final double costoTerapiaIntensiva = 2000;
+	
+	public static void setCostoTerapiaIntensiva(double costo) {
+		TerapiaIntensiva.costoTerapiaIntensiva = costo;
+	}
 	
 	@Override
 	public double getCostoHabitacion() {

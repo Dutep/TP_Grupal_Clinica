@@ -2,11 +2,15 @@ package modelo;
 
 public class Privada extends Habitacion {
 
-	public Privada(int numeroHabitacion) {
+	private static double costoPrivada;
+	
+	public Privada(String numeroHabitacion) {
 		super(numeroHabitacion);
 	}
-
-	private static final double costoPrivada = 1000;
+	
+	public static void setCostoPrivada(double costo) {
+		Privada.costoPrivada = costo;
+	}
 	
 	@Override
 	public double getCostoHabitacion() {

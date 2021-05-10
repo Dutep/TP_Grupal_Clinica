@@ -2,11 +2,15 @@ package modelo;
 
 public class Compartida extends Habitacion {
 
-	public Compartida(int numeroHabitacion) {
+	private static double costoCompartida;
+	
+	public Compartida(String numeroHabitacion) {
 		super(numeroHabitacion);
 	}
-
-	private static final double costoCompartida = 500;
+	
+	public static void setCostoCompartida(double costo) {
+		Compartida.costoCompartida = costo;
+	}
 	
 	@Override
 	public double getCostoHabitacion() {

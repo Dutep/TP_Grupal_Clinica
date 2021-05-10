@@ -1,5 +1,6 @@
 package modelo;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -11,6 +12,7 @@ public class Clinica {
 	private String telefono;
 	private String ciudad;
 	private Paciente salaPrivada;
+	private HashMap<String,Paciente> patio = new HashMap<String,Paciente>();
 	private Queue<Paciente> listaEspera = new LinkedList();
 	private HashMap<Long,Paciente> listaAtencion = new HashMap<Long,Paciente>();
 	private HashMap<Long,Habitacion> habitaciones = new HashMap<Long,Habitacion>();
@@ -48,15 +50,24 @@ public class Clinica {
 		listaEspera.add(paciente);
 		if (this.salaPrivada == null || paciente.prioridad(salaPrivada))
 			salaPrivada = paciente;
+		else
+			patio.put(paciente.getDni(), paciente);
 	}
+	
+	//Usar un único parámetro para los HashMaps. DNI o NroHistoria.
 	
 	public void Atencion() {
 		Paciente p = listaEspera.poll();
 		listaAtencion.put(p.getNroHistoria(), p);
+		if (salaPrivada.equals(p))
+			salaPrivada = null;
+		else
+			patio.remove(p.getDni());
 	}
 	
-	public void EgresoYFacturacion(Paciente paciente, Medico medico, int dias, Habitacion habitacion, int cantConsultas) {
+	public void EgresoYFacturacion(Paciente paciente, ArrayList<Prestacion> prestaciones) {
 		listaAtencion.remove(paciente.getNroHistoria()); //Exception para verificar
-		
 	}
+	
+	
 }
