@@ -6,11 +6,12 @@ public class ConsultaMedica extends Prestacion {
 
 	private IMedico medico;
 	private static double valorConsulta;
+	private static double porcentajeExtra;
 
 	public ConsultaMedica(int cantidad, IMedico medico) {
 		super(cantidad);
 		this.medico = medico;
-		super.subtotal = ConsultaMedica.valorConsulta * cantidad;
+		super.subtotal = ConsultaMedica.valorConsulta * cantidad + this.medico.getHonorario() * ConsultaMedica.porcentajeExtra;
 	}
 	//Posible excepcion por si no seteaste valorConsulta.
 	
@@ -20,6 +21,10 @@ public class ConsultaMedica extends Prestacion {
 
 	public static void setValorConsulta(double valor) {
 		ConsultaMedica.valorConsulta = valor;
+	}
+	
+	public static void setPorcentajeExtra(double porcentaje) {
+		ConsultaMedica.porcentajeExtra = 1 + porcentaje/100;
 	}
 	
 	@Override

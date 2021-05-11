@@ -8,6 +8,7 @@ import decorators.IMedico;
 import modelo.Clinica;
 import modelo.Compartida;
 import modelo.ConsultaMedica;
+import modelo.Factura;
 import modelo.Habitacion;
 import modelo.Internacion;
 import modelo.Joven;
@@ -28,6 +29,7 @@ public class PruebaClinica {
 		Privada.setCostoPrivada(1000);
 		TerapiaIntensiva.setCostoTerapiaIntensiva(1500);
 		ConsultaMedica.setValorConsulta(800);
+		ConsultaMedica.setPorcentajeExtra(20);
 		Medico.setHonorarioBase(1200);
 		
 		IMedico Medico1 = MedicoFactory.getMedico("Pediatria","Residente","Magister", "11234532", "Pepe", "Pepe", "San Luis 1234", "Batan", "5551234", 2345);
@@ -53,8 +55,8 @@ public class PruebaClinica {
 		prestaciones2.put(consulta3.getMedico().getNombre(), consulta3);
 		prestaciones2.put(internacion2.getHabitacion().getNumeroHabitacion(), internacion2);
 		
-		Calendar fecha1 = new GregorianCalendar(2020, 06, 26);
-		Calendar fecha2 = new GregorianCalendar(2021, 06, 24);
+		Calendar fecha1 = new GregorianCalendar(2020, 6, 26);
+		Calendar fecha2 = new GregorianCalendar(2021, 10, 24);
 		
 		System.out.println(Medico1.getHonorario());
 
@@ -62,10 +64,15 @@ public class PruebaClinica {
 		Clinica.getInstance().Ingreso(p2);
 		System.out.println(Clinica.getInstance().getSalaPrivada().getNombre());
 		Clinica.getInstance().EgresoYFacturacion(p1, prestaciones1);
+		try {
+			Thread.sleep(1001);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		Clinica.getInstance().EgresoYFacturacion(p2, prestaciones2);
 		System.out.println();
-		Clinica.getInstance().ReporteActividadMedica(Medico2, fecha1, fecha2);
-		System.out.println(fecha1.get(Calendar.YEAR) + " " + fecha1.get(Calendar.MONTH) + " " + fecha1.get(Calendar.DATE));
+		Clinica.getInstance().ReporteActividadMedica(Medico1, fecha1, fecha2);
+		//System.out.println(fecha1.get(Calendar.YEAR) + " " + fecha1.get(Calendar.MONTH) + " " + fecha1.get(Calendar.DATE));
 	}
 
 }

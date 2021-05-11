@@ -58,7 +58,9 @@ public class Factura implements Comparable{
 		else if (this.fecha.compareTo(f.getFecha()) < 0){
 			return -1;
 		}
-		return 0;
+		else {
+			return (f.getNroFactura() - this.nroFactura);
+		}
 	}
 	
 	public void mostrarFactura() {

@@ -1,7 +1,9 @@
 package modelo;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -25,7 +27,9 @@ public class Clinica {
 	private HashMap<Long,Habitacion> habitaciones = new HashMap<Long,Habitacion>();
 	private HashMap<String,Paciente> pacientesRegistrados = new HashMap<String,Paciente>();
 	private HashMap<Long,Medico> medicos = new HashMap<Long,Medico>();
-	Set<Factura> facturas = new TreeSet<>();
+	public Set<Factura> facturas = new TreeSet<>();
+	
+	DecimalFormat df = new DecimalFormat("#.00");
 	
 	private Clinica() {
 		this.nombre = "Clinica 1";
@@ -81,18 +85,33 @@ public class Clinica {
 	
 	public void ReporteActividadMedica(IMedico medico, Calendar fecha1, Calendar fecha2) {
 		Iterator<Factura> itFacturas = facturas.iterator();
+		Factura f1 =  null;
 		//Posible exception por si te pasan la fecha2 < fecha1
 		double total = 0;
-		while (itFacturas.hasNext() && itFacturas.next().getFecha().compareTo(fecha1) < 0) {
-			itFacturas.next();
-		}
-		System.out.println("Paciente \t\t Cantidad de consultas \t\t Honorario total \t\t Fecha");
-		while (itFacturas.hasNext() && itFacturas.next().getFecha().compareTo(fecha2) < 0) {
-			if(itFacturas.next().getPrestaciones().containsKey(medico.getNombre())) {
-				System.out.println(itFacturas.next().getPaciente().getNombre() + " " + itFacturas.next().getPaciente().getApellido() + " \t\t " + itFacturas.next().getPrestaciones().get(medico.getNombre()).getCantidad() + " \t\t " + itFacturas.next().getPrestaciones().get(medico.getNombre()).getCantidad() * medico.getHonorario() + " \t\t "+ itFacturas.next().getFecha());
-				total += itFacturas.next().getPrestaciones().get(medico.getNombre()).getCantidad() * medico.getHonorario();
+		
+		boolean condicion = true;
+		while (itFacturas.hasNext() && condicion) {
+			f1 = itFacturas.next();
+			if (f1.getFecha().compareTo(fecha1) >= 0) {
+				condicion = false;
 			}
-			itFacturas.next();
+		}
+		condicion = true;
+		
+		System.out.println("Paciente \t Cantidad de consultas \t Honorario total \t Fecha");
+		while (itFacturas.hasNext() && condicion && f1.getFecha().compareTo(fecha2) < 0) {
+			if(f1.getPrestaciones().containsKey(medico.getNombre())) {
+				System.out.println(f1.getPaciente().getNombre() + " " + f1.getPaciente().getApellido() + " \t\t " + f1.getPrestaciones().get(medico.getNombre()).getCantidad() + " \t\t " + df.format(f1.getPrestaciones().get(medico.getNombre()).getCantidad() * medico.getHonorario()) + " \t\t "+ f1.getFecha().get(Calendar.DATE) + "/" + (f1.getFecha().get(Calendar.MONTH)+1) + "/" + f1.getFecha().get(Calendar.YEAR));
+				total += f1.getPrestaciones().get(medico.getNombre()).getCantidad() * medico.getHonorario();
+			}
+			f1 = itFacturas.next();
+			if (f1.getFecha().compareTo(fecha2) > 0) {
+				condicion = false;
+			}
+		}
+		if(f1.getPrestaciones().containsKey(medico.getNombre()) && f1.getFecha().compareTo(fecha2) < 0) {
+			System.out.println(f1.getPaciente().getNombre() + " " + f1.getPaciente().getApellido() + " \t\t " + f1.getPrestaciones().get(medico.getNombre()).getCantidad() + " \t\t " + df.format(f1.getPrestaciones().get(medico.getNombre()).getCantidad() * medico.getHonorario()) + " \t\t "+ f1.getFecha().get(Calendar.DATE) + "/" + (f1.getFecha().get(Calendar.MONTH)+1) + "/" + f1.getFecha().get(Calendar.YEAR));
+			total += f1.getPrestaciones().get(medico.getNombre()).getCantidad() * medico.getHonorario();
 		}
 		System.out.println("Total= " + total);
 	}
