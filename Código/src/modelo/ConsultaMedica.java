@@ -1,18 +1,20 @@
 package modelo;
 
+import decorators.IMedico;
+
 public class ConsultaMedica extends Prestacion {
 
-	private Medico medico;
+	private IMedico medico;
 	private static double valorConsulta;
 
-	public ConsultaMedica(int cantidad, Medico medico) {
+	public ConsultaMedica(int cantidad, IMedico medico) {
 		super(cantidad);
 		this.medico = medico;
 		super.subtotal = ConsultaMedica.valorConsulta * cantidad;
 	}
 	//Posible excepcion por si no seteaste valorConsulta.
 	
-	public Medico getMedico() {
+	public IMedico getMedico() {
 		return medico;
 	}
 
@@ -22,7 +24,7 @@ public class ConsultaMedica extends Prestacion {
 	
 	@Override
 	public String toString() {
-		return this.medico.getNombre() + " \t\t " + ConsultaMedica.valorConsulta + " \t " + super.getCantidad() + " \t\t " + super.subtotal + "\n";
+		return this.medico.getNombre() + " \t\t " + ConsultaMedica.valorConsulta + " \t\t " + super.getCantidad() + " \t\t " + super.subtotal + "\n";
 	}
 
 	@Override

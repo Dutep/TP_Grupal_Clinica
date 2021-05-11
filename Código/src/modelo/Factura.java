@@ -3,33 +3,23 @@ package modelo;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 
-public class Factura {
+public class Factura implements Comparable{
 	private static int siguienteNumero = 0;
 	private int nroFactura;
 	private Calendar fecha = new GregorianCalendar();
 	private Paciente paciente;
-	private ArrayList<Prestacion> prestaciones = new ArrayList<Prestacion>();
-//	private IMedico medico;
-//	private Habitacion habitacion;
-//	private int cantDias;
-//	private int cantConsultas;
-//	private double SubtotalConsultas;
-//	private double SubtotalInternación;
-	private double total = 0;
+	private HashMap<String, Prestacion> prestaciones = new HashMap<String, Prestacion>();
+	private double total;
 	
-	public Factura(Paciente paciente, ArrayList<Prestacion> prestaciones) {
+	public Factura(Paciente paciente, HashMap<String, Prestacion> prestaciones) {
 		Factura.siguienteNumero++;
 		this.nroFactura = Factura.siguienteNumero;
 		this.fecha = fecha.getInstance();
 		this.paciente = paciente;
 		this.prestaciones = prestaciones;
-//		this.medico = medico;
-//		this.habitacion = habitacion;
-//		this.cantDias = cantDias;
-//		this.cantConsultas = cantConsultas;
-//		this.SubtotalConsultas = this.prestaciones. getHonorario() * 1.2 * cantConsultas;
-//		this.SubtotalInternación = this.habitacion.getCosto(cantDias);
+		this.calculaTotal(prestaciones);
 	}
 
 	public int getNroFactura() {
@@ -44,30 +34,40 @@ public class Factura {
 		return paciente;
 	}
 
-//	public IMedico getMedico() {
-//		return medico;
-//	}
-//
-//	public Habitacion getHabitacion() {
-//		return habitacion;
-//	}
-//
-//	public int getCantDias() {
-//		return cantDias;
-//	}
-//
-//	public int getCantConsultas() {
-//		return cantConsultas;
-//	}
+	public double getTotal() {
+		return this.total;
+	}
+	
+	public HashMap<String, Prestacion> getPrestaciones() {
+		return prestaciones;
+	}
 
+	private void calculaTotal(HashMap<String, Prestacion> prestaciones) {
+		this.total = 0;
+		for (Prestacion p : prestaciones.values()) {
+			this.total += p.getSubtotal();
+		}
+	}
+	
+	@Override
+	public int compareTo(Object o) {
+		Factura f = (Factura) o;
+		if(this.fecha.compareTo(f.getFecha()) > 0) {
+			return 1;
+		}
+		else if (this.fecha.compareTo(f.getFecha()) < 0){
+			return -1;
+		}
+		return 0;
+	}
+	
 	public void mostrarFactura() {
 		System.out.println("Factura: \n"
 		+ "prestacion \t valor \t\t cantidad \t subtotal\n");
-		for (Prestacion p : prestaciones) {
+		for (Prestacion p : prestaciones.values()) {
 			System.out.println(p);
-			this.total += p.getSubtotal();
 		}
-		System.out.println(this.total);
+		System.out.println("\t\t\t\t\t TOTAL:  " + this.total);
 	}
 	
 }
