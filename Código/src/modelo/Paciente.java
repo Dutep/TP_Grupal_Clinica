@@ -3,7 +3,6 @@ package modelo;
 public abstract class Paciente extends Persona implements IRangoEtario{
 	private static long siguienteNumero = 0;
 	private long nroHistoria;
-	//private boolean estaEnPatio;
 	
 	public Paciente(String dni, String nombre, String apellido, String domicilio, String ciudad, String telefono,long nroHistoria) {
 		super(dni, nombre, apellido, domicilio, ciudad, telefono);
@@ -19,5 +18,13 @@ public abstract class Paciente extends Persona implements IRangoEtario{
 	public long getNroHistoria() {
 		return nroHistoria;
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		Paciente otro = (Paciente) obj;
+		return super.getDni().equals(otro.getDni());
+	}
+	
+	
 
 }

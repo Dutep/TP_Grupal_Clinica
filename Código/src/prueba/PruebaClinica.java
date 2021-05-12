@@ -5,6 +5,9 @@ import java.util.GregorianCalendar;
 import java.util.HashMap;
 
 import decorators.IMedico;
+import excepciones.NoEstaPacienteException;
+import excepciones.NoHayConsultaException;
+import excepciones.OrdenFechasIncorrectoException;
 import modelo.Clinica;
 import modelo.Compartida;
 import modelo.ConsultaMedica;
@@ -36,7 +39,7 @@ public class PruebaClinica {
 		IMedico Medico2 = MedicoFactory.getMedico("Cirugia","Residente","Magister", "88234532", "Lolo", "Lolo", "San Juan 8234", "Miramar", "8881234", 8888);
 		Habitacion h1 = new Privada("55");
 		Paciente p1 = new Joven("111", "nini", "nono", "112233", "mdp", "123", 123123);
-		Paciente p2 = new Mayor("111", "ninooo", "nono", "112233", "mdp", "123", 123123);
+		Paciente p2 = new Mayor("222", "ninooo", "nunu", "445566", "balcarce", "456", 456456);
 		
 		HashMap<String, Prestacion> prestaciones1 = new HashMap<String, Prestacion>();
 		HashMap<String, Prestacion> prestaciones2 = new HashMap<String, Prestacion>();
@@ -56,23 +59,41 @@ public class PruebaClinica {
 		prestaciones2.put(internacion2.getHabitacion().getNumeroHabitacion(), internacion2);
 		
 		Calendar fecha1 = new GregorianCalendar(2020, 6, 26);
-		Calendar fecha2 = new GregorianCalendar(2021, 10, 24);
-		
-		System.out.println(Medico1.getHonorario());
+		Calendar fecha2 = new GregorianCalendar(2021, 12, 24);
 
 		Clinica.getInstance().Ingreso(p1);
 		Clinica.getInstance().Ingreso(p2);
-		System.out.println(Clinica.getInstance().getSalaPrivada().getNombre());
-		Clinica.getInstance().EgresoYFacturacion(p1, prestaciones1);
+		
+		Clinica.getInstance().Atencion();
+		Clinica.getInstance().Atencion();
+		
+		try {
+			Clinica.getInstance().EgresoYFacturacion(p1, prestaciones1);
+		} catch (NoEstaPacienteException e1) {
+			System.out.println(e1.getMessage());
+		}
+		
 		try {
 			Thread.sleep(1001);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
+		} catch (InterruptedException e2) {
+			e2.printStackTrace();
 		}
-		Clinica.getInstance().EgresoYFacturacion(p2, prestaciones2);
+		
+		try {
+			Clinica.getInstance().EgresoYFacturacion(p2, prestaciones2);
+		} catch (NoEstaPacienteException e3) {
+			System.out.println(e3.getMessage());
+		}
+		
 		System.out.println();
-		Clinica.getInstance().ReporteActividadMedica(Medico1, fecha1, fecha2);
-		//System.out.println(fecha1.get(Calendar.YEAR) + " " + fecha1.get(Calendar.MONTH) + " " + fecha1.get(Calendar.DATE));
+		
+		try {
+			Clinica.getInstance().ReporteActividadMedica(Medico1, fecha1, fecha2);
+		} catch (NoHayConsultaException e4) {
+			System.out.println(e4.getMessage());
+		} catch (OrdenFechasIncorrectoException e4) {
+			System.out.println(e4.getMessage());
+		}
 	}
 
 }
