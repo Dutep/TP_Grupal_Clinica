@@ -6,5 +6,4 @@ public class NoEstaPacienteException extends Exception{
 		super(message);
 	}
 
-	
 }

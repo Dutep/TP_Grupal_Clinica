@@ -5,15 +5,14 @@ import decorators.IMedico;
 public class ConsultaMedica extends Prestacion {
 
 	private IMedico medico;
-	private static double valorConsulta;
-	private static double porcentajeExtra;
+	private static double valorConsulta = 800;
+	private static double porcentajeExtra = 1.2;
 
 	public ConsultaMedica(int cantidad, IMedico medico) {
 		super(cantidad);
 		this.medico = medico;
 		super.subtotal = ConsultaMedica.valorConsulta * cantidad + this.medico.getHonorario() * ConsultaMedica.porcentajeExtra;
 	}
-	//Posible excepcion por si no seteaste valorConsulta.
 	
 	public IMedico getMedico() {
 		return medico;

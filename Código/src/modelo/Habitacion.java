@@ -1,7 +1,5 @@
 package modelo;
 
-import excepciones.ValorNoEstablecidoException;
-
 public abstract class Habitacion {
 	
 	protected static double costoAsignacion;
@@ -11,7 +9,7 @@ public abstract class Habitacion {
 		this.numeroHabitacion = numeroHabitacion;
 	}
 
-	public static void setCostoAsignacion(double costo) throws ValorNoEstablecidoException{
+	public static void setCostoAsignacion(double costo) {
 			Habitacion.costoAsignacion = costo;
 	}
 	

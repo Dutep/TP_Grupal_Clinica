@@ -32,7 +32,7 @@ public class PruebaClinica {
 		Privada.setCostoPrivada(1000);
 		TerapiaIntensiva.setCostoTerapiaIntensiva(1500);
 		ConsultaMedica.setValorConsulta(800);
-		ConsultaMedica.setPorcentajeExtra(20);
+		ConsultaMedica.setPorcentajeExtra(90);
 		Medico.setHonorarioBase(1200);
 		
 		IMedico Medico1 = MedicoFactory.getMedico("Pediatria","Residente","Magister", "11234532", "Pepe", "Pepe", "San Luis 1234", "Batan", "5551234", 2345);
@@ -46,9 +46,9 @@ public class PruebaClinica {
 		
 		ConsultaMedica consulta1 = new ConsultaMedica(3, Medico1);
 		ConsultaMedica consulta2 = new ConsultaMedica(5, Medico2);
-		Internacion internacion1 = new Internacion(7, h1);
-		
 		ConsultaMedica consulta3 = new ConsultaMedica(4, Medico1);
+		
+		Internacion internacion1 = new Internacion(7, h1);
 		Internacion internacion2 = new Internacion(6, h1);
 		
 		prestaciones1.put(internacion1.getHabitacion().getNumeroHabitacion(), internacion1);

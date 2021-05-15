@@ -2,7 +2,7 @@ package modelo;
 
 public class TerapiaIntensiva extends Habitacion {
 
-	private static double costoTerapiaIntensiva;
+	private static double costoTerapiaIntensiva = 0;
 	
 	public TerapiaIntensiva(String numeroHabitacion) {
 		super(numeroHabitacion);

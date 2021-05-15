@@ -17,6 +17,12 @@ import excepciones.NoEstaPacienteException;
 import excepciones.NoHayConsultaException;
 import excepciones.OrdenFechasIncorrectoException;
 
+/**
+ * @author Imanol Vázquez,Juan Manuel Mujica,Francisco Stimmler,Sebastian Agüero   
+ *<br>
+ *Clase que representa a la clínica.
+ */
+
 public class Clinica {
 	private static Clinica instance = null;
 	private String nombre;
@@ -34,6 +40,10 @@ public class Clinica {
 	
 	DecimalFormat df = new DecimalFormat("#.00");
 	
+	/**
+	 * Constructor para crear la Clínica, con valores ya establecidos.
+	 */
+	
 	private Clinica() {
 		this.nombre = "Clinica 1";
 		this.direccion = "Colón 2321";
@@ -41,6 +51,11 @@ public class Clinica {
 		this.ciudad = "Mar del Plata";
 		this.salaPrivada = null;
 	}
+	
+	/**
+	 * Se aplicó Patrón Singleton.
+	 * Se obtiene (o se crea en caso que no esté) la instancia a la clínica.
+	 */
 	
 	public static Clinica getInstance() {
 		if (Clinica.instance == null) {
@@ -54,30 +69,57 @@ public class Clinica {
 		return salaPrivada;
 	}
 
+	/**
+	 * Agrega un médico al Hashmap de médicos, con su número de matrícula como clave.<br>
+	 * <b>Pre: </b> El parametro medico debe ser distinto de null.<br>
+	 * <b>Post: </b> Se agrega un medico mas al HashMap de médicos.<br>
+	 * @param medico: Parámetro que será agregado al HashMap de médicos.
+	 */
+	
 	public void addMedico(Medico medico) {
 		this.medicos.put(medico.getNroMatricula(), medico);
 	}
 	
+	/**
+	 * Módulo de ingreso de un paciente a la clínica.<br>
+	 * <b>Pre: </b> El parametro paciente debe ser distinto de null<br>
+	 * <b>Post: </b> Si el paciente no estaba registrado, se lo registra con su DNI.<br>
+	 * Se agrega al paciente a la lista de espera.<br>
+	 * Si la sala privada estaba vacía o si el paciente entrante tiene prioridad sobre el que ya estaba allí, se lo asigna a la sala privada, si no, se lo manda al patio.
+	 * @param paciente: Paciente que ingresa a la clínica.
+	 */
+	
 	public void Ingreso(Paciente paciente) {
 		if (!pacientesRegistrados.containsKey(paciente.getDni()))
 			pacientesRegistrados.put(paciente.getDni(), paciente);
-		//if (!(listaEspera.contains(paciente)))
 		listaEspera.add(paciente);
-		//ACÁ CAPAZ VA UNA EXCEPCIÓN, VER.
 		if (this.salaPrivada == null || paciente.prioridad(salaPrivada))
 			salaPrivada = paciente;
 		else
 			patio.put(paciente.getDni(), paciente);
 	}
 	
+	/**
+	 * Módulo que retira al paciente de la espera y lo ubica en la Lista de Pacientes en Atención.<br>
+	 * <b>Post: </b> Se retira al siguiente paciente de la lista de espera y se lo pone en atención.
+	 */
+	
 	public void Atencion() {
-		Paciente p = listaEspera.poll();
+		Paciente p = listaEspera.poll(); //Preguntar si hay alguien en lista de espera.
 		listaAtencion.put(p.getNroHistoria(), p);
 		if (salaPrivada != null && salaPrivada.equals(p))
 			salaPrivada = null;
 		else
 			patio.remove(p.getDni());
 	}
+	
+	/**
+	 * Módulo que elige un paciente, lo retira de la lista de atención y realiza la facturación correspondiente.<br>
+	 * <b>Pre: </b> El parametro paciente debe ser distinto de null.<br>
+	 * <b>Post: </b> Se crea la factura y se retira al paciente de la lista de atención.
+	 * @param paciente: Paciente que se retira de atención y al cual se le genera la factura.
+	 * @param prestaciones: Prestaciones que recibió el paciente y que figurarán en la factura.
+	 */
 	
 	public void EgresoYFacturacion(Paciente paciente, HashMap<String, Prestacion> prestaciones) throws NoEstaPacienteException{
 		if (listaAtencion.containsKey(paciente.getNroHistoria())) {
@@ -89,6 +131,15 @@ public class Clinica {
 		else
 			throw new NoEstaPacienteException("El paciente no se encuentra en la lista de atención.");
 	}
+	
+	/**
+	 * Módulo que reporta la actividad de un médico entre dos fechas dadas, enumerando los pacientes atendidos.<br>
+	 * <b>Pre: </b> Todos los parámetros deben ser distintos de null.<br>
+	 * <b>Post: </b> 
+	 * @param medico: Medico del cual se realice el reporte de actividad.
+	 * @param fecha1: Fecha desde la cual se solicita el reporte.
+	 * @param fecha2: Fecha hasta la cual se solicita el reporte.
+	 */
 	
 	public void ReporteActividadMedica(IMedico medico, Calendar fecha1, Calendar fecha2) throws NoHayConsultaException, OrdenFechasIncorrectoException {
 		if (fecha1.compareTo(fecha2) <= 0) {

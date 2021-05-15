@@ -2,7 +2,7 @@ package modelo;
 
 public class Privada extends Habitacion {
 
-	private static double costoPrivada;
+	private static double costoPrivada = 0;
 	
 	public Privada(String numeroHabitacion) {
 		super(numeroHabitacion);

@@ -2,7 +2,7 @@ package modelo;
 
 public class Compartida extends Habitacion {
 
-	private static double costoCompartida;
+	private static double costoCompartida = 0;
 	
 	public Compartida(String numeroHabitacion) {
 		super(numeroHabitacion);
