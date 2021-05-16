@@ -54,7 +54,7 @@ public class Clinica {
 	
 	/**
 	 * Se aplicó Patrón Singleton.
-	 * Se obtiene (o se crea en caso que no esté) la instancia a la clínica.
+	 * Se obtiene (o se crea en caso que no esté creada) la instancia a la clínica.
 	 */
 	
 	public static Clinica getInstance() {
@@ -101,11 +101,12 @@ public class Clinica {
 	
 	/**
 	 * Módulo que retira al paciente de la espera y lo ubica en la Lista de Pacientes en Atención.<br>
+	 * <b>Pre: </b> Debe haber al menos un paciente en la lista de espera.
 	 * <b>Post: </b> Se retira al siguiente paciente de la lista de espera y se lo pone en atención.
 	 */
 	
 	public void Atencion() {
-		Paciente p = listaEspera.poll(); //Preguntar si hay alguien en lista de espera.
+		Paciente p = listaEspera.poll();
 		listaAtencion.put(p.getNroHistoria(), p);
 		if (salaPrivada != null && salaPrivada.equals(p))
 			salaPrivada = null;
@@ -116,7 +117,7 @@ public class Clinica {
 	/**
 	 * Módulo que elige un paciente, lo retira de la lista de atención y realiza la facturación correspondiente.<br>
 	 * <b>Pre: </b> El parametro paciente debe ser distinto de null.<br>
-	 * <b>Post: </b> Se crea la factura y se retira al paciente de la lista de atención.
+	 * <b>Post: </b> Se crea una factura, se la agrega a la lista de facturas de la clínica y se retira al paciente de la lista de atención.
 	 * @param paciente: Paciente que se retira de atención y al cual se le genera la factura.
 	 * @param prestaciones: Prestaciones que recibió el paciente y que figurarán en la factura.
 	 */
@@ -135,8 +136,8 @@ public class Clinica {
 	/**
 	 * Módulo que reporta la actividad de un médico entre dos fechas dadas, enumerando los pacientes atendidos.<br>
 	 * <b>Pre: </b> Todos los parámetros deben ser distintos de null.<br>
-	 * <b>Post: </b> 
-	 * @param medico: Medico del cual se realice el reporte de actividad.
+	 * <b>Post: </b> Se muestran las facturas correspondientes al período dado.<br>
+	 * @param medico: Médico del cual se realice el reporte de actividad.
 	 * @param fecha1: Fecha desde la cual se solicita el reporte.
 	 * @param fecha2: Fecha hasta la cual se solicita el reporte.
 	 */

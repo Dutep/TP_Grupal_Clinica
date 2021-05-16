@@ -15,7 +15,7 @@ public class DecoratorMagister extends DecoratorMedico {
 
 	}
 	/**
-	 * Devuelve el honorario del con un aumento del 5% por su posgrado de Magister
+	 * Devuelve el honorario del médico con un aumento del 5% por su posgrado de Magister
 	 * @return el honorario del medico más el 5% 
 	 */
 	@Override

@@ -16,7 +16,7 @@ public class DecoratorPediatria extends DecoratorMedico {
 		super(encapsulado);
 	}
 	/**
-	 * Devuelve el honorario del con un aumento del 7% por su especialidad en pediatria
+	 * Devuelve el honorario del médico con un aumento del 7% por su especialidad en pediatria
 	 * @return el honorario del medico más el 7% 
 	 */
 	@Override

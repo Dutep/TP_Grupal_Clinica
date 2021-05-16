@@ -14,12 +14,12 @@ public class Medico extends Persona implements IMedico{
 	/**
 	 * Constructor con siete parametros para setear el medico
 	 * <br>
-	 * @param dni: parametro de tipo Sting que representa el dni del medico 
-	 * @param nombre: parametro de tipo Sting que representa el nombre del medico 
-	 * @param apellido: parametro de tipo Sting que representa el apellido del medico
-	 * @param domicilio: parametro de tipo Sting que representa la domicilio donde reside el medico
-	 * @param ciudad: parametro de tipo Sting que representa la ciudad donde reside el medico
-	 * @param telefono: parametro de tipo Sting que representa el telefono del medico
+	 * @param dni: parametro de tipo String que representa el dni del medico 
+	 * @param nombre: parametro de tipo String que representa el nombre del medico 
+	 * @param apellido: parametro de tipo String que representa el apellido del medico
+	 * @param domicilio: parametro de tipo String que representa la domicilio donde reside el medico
+	 * @param ciudad: parametro de tipo String que representa la ciudad donde reside el medico
+	 * @param telefono: parametro de tipo String que representa el telefono del medico
 	 * @param nroMatricula: parametro de tipo long que representa el numero de Matricula del medico
 
 	 */

@@ -17,12 +17,11 @@ public class DecoratorCirugia extends DecoratorMedico {
 	}
 
 	/**
-	 * Devuelve el honorario del con un aumento del 10% por su especialidad en cirujia
+	 * Devuelve el honorario del médico con un aumento del 10% por su especialidad en cirujia
 	 * @return el honorario del medico más el 10% 
 	 */
 	@Override
 	public double getHonorario() {
 		return this.encapsulado.getHonorario() *1.1;
 	}
-
 }

@@ -15,7 +15,7 @@ public class DecoratorPermanente extends DecoratorMedico {
 
 	}
 	/**
-	 * Devuelve el honorario del con un aumento del 10% por su contratación permanente
+	 * Devuelve el honorario del médico con un aumento del 10% por su contratación permanente
 	 * @return el honorario del medico más el 10% 
 	 */
 	@Override

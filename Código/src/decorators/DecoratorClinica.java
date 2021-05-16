@@ -16,7 +16,7 @@ public class DecoratorClinica extends DecoratorMedico {
 		super(encapsulado);
 	}
 	/**
-	 * Devuelve el honorario del con un aumento del 5% por su especialidad en clinica
+	 * Devuelve el honorario del médico con un aumento del 5% por su especialidad en clinica
 	 * @return el honorario del medico más el 5% 
 	 */
 	@Override

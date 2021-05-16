@@ -2,12 +2,22 @@ package modelo;
 
 import decorators.IMedico;
 
+/**
+ * @author Imanol Vázquez,Juan Manuel Mujica,Francisco Stimmler,Sebastian Agüero   
+ *<br>
+ *Clase que representa una consulta médica realizada por un paciente, se extiende de la clase Prestación.
+ */
 public class ConsultaMedica extends Prestacion {
-
 	private IMedico medico;
 	private static double valorConsulta = 800;
 	private static double porcentajeExtra = 1.2;
 
+	/**
+     * Constructor con dos parametros para setear la cantidad de consultas y el médico que las atendió.<br>
+     * <b> Pre: </b> El parámetro cantidad debe ser entero positivo. <br>
+     * @param cantidad : parametro de tipo int que representa la cantidad de consultas realizadas por el medico.
+     * @param medico : parametro de tipo IMedico que representa el médico que atendió la consulta.
+     */
 	public ConsultaMedica(int cantidad, IMedico medico) {
 		super(cantidad);
 		this.medico = medico;

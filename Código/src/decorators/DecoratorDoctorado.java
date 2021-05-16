@@ -15,7 +15,7 @@ public class DecoratorDoctorado extends DecoratorMedico {
 
 	}
 	/**
-	 * Devuelve el honorario del con un aumento del 10% por su posgrado de Doctorado
+	 * Devuelve el honorario del médico con un aumento del 10% por su posgrado de Doctorado
 	 * @return el honorario del medico más el 10% 
 	 */
 	@Override
