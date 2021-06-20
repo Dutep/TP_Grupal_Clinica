@@ -4,6 +4,7 @@ package modelo;
  * @author Imanol Vázquez,Juan Manuel Mujica,Francisco Stimmler,Sebastian Agüero   
  *<br>
  *Interfaz que representa el rango etario que posee un paciente.
+ *Para determinar las prioridades de los pacientes se utiliza Double Dispatch.
  */
 
 public interface IRangoEtario {

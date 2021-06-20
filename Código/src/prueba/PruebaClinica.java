@@ -5,6 +5,7 @@ import java.util.GregorianCalendar;
 import java.util.HashMap;
 
 import decorators.IMedico;
+import excepciones.DatosInvalidosMedicoException;
 import excepciones.NoEstaPacienteException;
 import excepciones.NoHayConsultaException;
 import excepciones.OrdenFechasIncorrectoException;
@@ -35,8 +36,22 @@ public class PruebaClinica {
 		ConsultaMedica.setPorcentajeExtra(90);
 		Medico.setHonorarioBase(1200);
 		
-		IMedico Medico1 = MedicoFactory.getMedico("Pediatria","Residente","Magister", "11234532", "Pepe", "Pepe", "San Luis 1234", "Batan", "5551234", 2345);
-		IMedico Medico2 = MedicoFactory.getMedico("Cirugia","Residente","Magister", "88234532", "Lolo", "Lolo", "San Juan 8234", "Miramar", "8881234", 8888);
+		IMedico Medico1 = null;
+		try {
+			Medico1 = MedicoFactory.getMedico("Pediatria","Residente","Magister", "11234532", "Pepe", "Pepe", "San Luis 1234", "Batan", "5551234", 2345);
+		}
+		catch(DatosInvalidosMedicoException e){
+			System.out.println(e.getMessage());
+		}
+		
+		IMedico Medico2 = null;
+		try {
+			Medico2 = MedicoFactory.getMedico("Cirugia","Residente","Magister", "88234532", "Lolo", "Lolo", "San Juan 8234", "Miramar", "8881234", 8888);
+		}
+		catch(DatosInvalidosMedicoException e){
+			System.out.println(e.getMessage());
+		}
+		
 		Habitacion h1 = new Privada("55");
 		Paciente p1 = new Joven("111", "nini", "nono", "112233", "mdp", "123", 123123);
 		Paciente p2 = new Mayor("222", "ninooo", "nunu", "445566", "balcarce", "456", 456456);

@@ -24,19 +24,127 @@ import excepciones.OrdenFechasIncorrectoException;
  */
 
 public class Clinica {
-	private static Clinica instance = null;
+    /**
+     * @aggregation composite
+     */
+    private static Clinica instance = null;
 	private String nombre;
 	private String direccion;
 	private String telefono;
 	private String ciudad;
-	private Paciente salaPrivada;
+
+    /**
+     * @aggregation shared
+     */
+    private Paciente salaPrivada;
 	private HashMap<String,Paciente> patio = new HashMap<String,Paciente>();
-	private Queue<Paciente> listaEspera = new LinkedList();
+	
 	private HashMap<Long,Paciente> listaAtencion = new HashMap<Long,Paciente>();
 	private HashMap<Long,Habitacion> habitaciones = new HashMap<Long,Habitacion>();
 	private HashMap<String,Paciente> pacientesRegistrados = new HashMap<String,Paciente>();
 	private HashMap<Long,Medico> medicos = new HashMap<Long,Medico>();
-	public Set<Factura> facturas = new TreeSet<>();
+	private HashMap<String,Asociado> asociados = new HashMap<String,Asociado>();
+
+	/**
+     * @aggregation composite
+     */
+    public Set<Factura> facturas = new TreeSet<>();
+
+    /**
+     * @aggregation shared
+     */
+    private Queue<Paciente> listaEspera = new LinkedList();
+    
+    
+	public void setSalaPrivada(Paciente salaPrivada) {
+		this.salaPrivada = salaPrivada;
+	}
+
+	public void setPatio(HashMap<String, Paciente> patio) {
+		this.patio = patio;
+	}
+
+	public void setListaEspera(Queue<Paciente> listaEspera) {
+		this.listaEspera = listaEspera;
+	}
+
+	public void setListaAtencion(HashMap<Long, Paciente> listaAtencion) {
+		this.listaAtencion = listaAtencion;
+	}
+
+	public void setHabitaciones(HashMap<Long, Habitacion> habitaciones) {
+		this.habitaciones = habitaciones;
+	}
+
+	public void setPacientesRegistrados(HashMap<String, Paciente> pacientesRegistrados) {
+		this.pacientesRegistrados = pacientesRegistrados;
+	}
+
+	public void setMedicos(HashMap<Long, Medico> medicos) {
+		this.medicos = medicos;
+	}
+
+	public void setFacturas(Set<Factura> facturas) {
+		this.facturas = facturas;
+	}
+
+
+    public HashMap<String, Asociado> getAsociados() {
+		return asociados;
+	}
+
+	public void setAsociados(HashMap<String, Asociado> asociados) {
+		this.asociados = asociados;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public String getDireccion() {
+		return direccion;
+	}
+
+	public String getTelefono() {
+		return telefono;
+	}
+
+	public String getCiudad() {
+		return ciudad;
+	}
+
+	public HashMap<String, Paciente> getPatio() {
+		return patio;
+	}
+
+	public Queue<Paciente> getListaEspera() {
+		return listaEspera;
+	}
+
+	public HashMap<Long, Paciente> getListaAtencion() {
+		return listaAtencion;
+	}
+
+	public HashMap<Long, Habitacion> getHabitaciones() {
+		return habitaciones;
+	}
+
+	public HashMap<String, Paciente> getPacientesRegistrados() {
+		return pacientesRegistrados;
+	}
+
+	public HashMap<Long, Medico> getMedicos() {
+		return medicos;
+	}
+
+	public Set<Factura> getFacturas() {
+		return facturas;
+	}
+
+	public DecimalFormat getDf() {
+		return df;
+	}
+
 	
 	DecimalFormat df = new DecimalFormat("#.00");
 	

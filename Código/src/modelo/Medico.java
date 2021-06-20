@@ -40,5 +40,5 @@ public class Medico extends Persona implements IMedico{
 	@Override
 	public double getHonorario() {
 		return honorarioBase;
-	}
+	}	
 }

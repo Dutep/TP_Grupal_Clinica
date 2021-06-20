@@ -8,7 +8,10 @@ import decorators.IMedico;
  *Clase que representa una consulta médica realizada por un paciente, se extiende de la clase Prestación.
  */
 public class ConsultaMedica extends Prestacion {
-	private IMedico medico;
+    /**
+     * @aggregation shared
+     */
+    private IMedico medico;
 	private static double valorConsulta = 800;
 	private static double porcentajeExtra = 1.2;
 

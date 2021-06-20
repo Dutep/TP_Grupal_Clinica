@@ -14,7 +14,11 @@ public class Factura implements Comparable{
 	private static int siguienteNumero = 0;
 	private int nroFactura;
 	private Calendar fecha = new GregorianCalendar();
-	private Paciente paciente;
+
+    /**
+     * @aggregation shared
+     */
+    private Paciente paciente;
 	private HashMap<String, Prestacion> prestaciones = new HashMap<String, Prestacion>();
 	private double total;
 	

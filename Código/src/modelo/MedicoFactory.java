@@ -8,7 +8,13 @@ import decorators.DecoratorPediatria;
 import decorators.DecoratorPermanente;
 import decorators.DecoratorResidente;
 import decorators.IMedico;
+import excepciones.DatosInvalidosMedicoException;
 
+/**
+ * @author Imanol Vázquez,Juan Manuel Mujica,Francisco Stimmler,Sebastian Agüero   
+ *<br>
+ *Clase que se encarga de la creación de médicos mediante la utilización del Patrón Factory.
+ */
 public class MedicoFactory {
 	/**
      *Metodo estático que genera una instancia de IMedico y lo decora de acuerdo a los parámetros recibidos.<br>
@@ -27,30 +33,45 @@ public class MedicoFactory {
      *@param nroMatricula : parámetro de tipo long que representa número de matricula particular del médico a crear.
      *@return IMedico con todos sus atributos y decoradores correspondientes indicados.
      */
-	public static IMedico getMedico(String especialidad,String contratacion,String posgrado,String dni, String nombre, String apellido, String domicilio, String ciudad, String telefono,long nroMatricula) {
+	public static IMedico getMedico(String especialidad,String contratacion,String posgrado,String dni, String nombre, String apellido, String domicilio, String ciudad, String telefono,long nroMatricula) throws DatosInvalidosMedicoException {
 
-		IMedico encapsulado = new Medico(dni, nombre, apellido, domicilio, ciudad, telefono, nroMatricula);
+		IMedico encapsulado = null;
+		if(especialidad.equals("Clinica")) {
+			encapsulado = new MedicoClinico(dni, nombre, apellido, domicilio, ciudad, telefono, nroMatricula);
+		}else if(especialidad.equals("Cirugia")) {
+			encapsulado = new MedicoCirujano(dni, nombre, apellido, domicilio, ciudad, telefono, nroMatricula);
+		}else if(especialidad.equals("Pediatria")) {
+			encapsulado = new MedicoPediatra(dni, nombre, apellido, domicilio, ciudad, telefono, nroMatricula);
+		}else {
+			throw new DatosInvalidosMedicoException("Especialidad inválida.");
+		}
+		//IMedico encapsulado = new Medico(dni, nombre, apellido, domicilio, ciudad, telefono, nroMatricula);
 		IMedico respuesta = null;
 
-
-		if(especialidad.equals("Clinica")) {
+		/*if(especialidad.equals("Clinica")) {
 			respuesta = new DecoratorClinica(encapsulado);
 		}else if(especialidad.equals("Cirugia")) {
 			respuesta = new DecoratorCirugia(encapsulado);
 		}else if(especialidad.equals("Pediatria")) {
 			respuesta = new DecoratorPediatria(encapsulado);
-		}
+		}else {
+			throw new DatosInvalidosMedicoException("Especialidad inválida.");
+		}*/
 
 		if(posgrado.equals("Doctorado")) {
-			respuesta = new DecoratorDoctorado(respuesta);
+			respuesta = new DecoratorDoctorado(encapsulado);
 		}else if(posgrado.equals("Magister")) {
-			respuesta = new DecoratorMagister(respuesta);
+			respuesta = new DecoratorMagister(encapsulado);
+		}else {
+			throw new DatosInvalidosMedicoException("Doctorado inválido.");
 		}
 
 		if(contratacion.equals("Permanente")) {
 			respuesta = new DecoratorPermanente(respuesta);
 		}else if(contratacion.equals("Residente")) {
 			respuesta = new DecoratorResidente(respuesta);
+		}else {
+			throw new DatosInvalidosMedicoException("Contratación inválida.");
 		}
 
 		return respuesta;

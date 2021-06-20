@@ -7,7 +7,10 @@ package modelo;
  */
 public class Internacion extends Prestacion {
 
-	private Habitacion habitacion;
+    /**
+     * @aggregation shared
+     */
+    private Habitacion habitacion;
 	
 	/**
      * Constructor con dos parametros para setear la cantidad de consultas y la habitación en la que se lo internó.<br>

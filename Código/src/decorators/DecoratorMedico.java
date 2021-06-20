@@ -2,11 +2,15 @@ package decorators;
 /**
  * @author Imanol Vázquez,Juan Manuel Mujica,Francisco Stimmler,Sebastian Agüero   
  *<br>
+ *Se utiliza el Patrón Decorator.
  *Clase abstacta padre de todos los decoradores de medico
  */
 public abstract class DecoratorMedico implements IMedico{
-	
-	protected IMedico encapsulado;
+
+    /**
+     * @aggregation shared
+     */
+    protected IMedico encapsulado;
 	/**
 	 * Constructor con un parametro para setear el medico a decorar
 	 * <br>
